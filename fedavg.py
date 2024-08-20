@@ -175,6 +175,7 @@ def main(args):
             # copy weights
             # net_glob.load_state_dict(torch.load('./net_glob/{}_{}_glob.pth'.format(args.model, args.dataset)))
             w_glob = net_glob.state_dict()
+            #net_glob.state_dict()调用了net_glob的state_dict方法，‌该方法返回模型当前的所有参数（‌包括权重和偏置）‌的字典。‌
 
                 
             # w_size = 0
@@ -211,6 +212,7 @@ def main(args):
                 mse_errors = [] 
                 communication_cost_sum = 0
                 w_update_locals = []
+                #对于每个client都做本地跟新
                 for idx in range(len(chosenUsers)):
                     local = LocalUpdate(args=args, 
                                         dataset=dataset_train, 
