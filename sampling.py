@@ -89,11 +89,11 @@ def mnist_noniid(args, dataset, num_users, num_items):
             num_items_iid = int(np.ceil((1-args.degree_noniid)*num_items_i/len(classes)))
             num_items_noniid = int(np.ceil(args.degree_noniid*num_items_i/num_digit_noniid))            
             
-            c = []
+            c = []#挑一定数量的iid的，再挑一定数量non_iid的
             for j in range(len(classes)):
                 b = (np.random.choice(classes_index[j],int(num_items_iid),\
                                       replace=False))
-                classes_index[j]=list(set(classes_index[j])-set(b))
+                classes_index[j]=list(set(classes_index[j])-set(b))#从每一类中挑选b出来再减去b
                 for m in range(num_items_iid):
                     c.append(b[m])
             for j in list(digit_ch_list[i]):
