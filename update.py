@@ -87,7 +87,12 @@ class LocalUpdate(object):
             if self.args.gpu != -1:
                 images, labels = images.cuda(), labels.cuda()
             images, labels = autograd.Variable(images), autograd.Variable(labels)
+            #将images和labels封装成autograd.Variable对象。‌在旧版本的PyTorch中，‌Variable是自动梯度计算（‌autograd）‌的核心类，
+            # ‌用于封装Tensor，‌并提供自动求导功能。‌然而，‌在新版本的PyTorch中，‌Tensor和Variable已经合并，‌Tensor本身就已经具备了
+            # 自动求导的功能，‌因此在新代码中通常不需要显式地使用Variable
             net = net.float()
+            # 在PyTorch中，‌net = net.float() 这行代码的作用是将模型net中的所有参数转换为浮点数类型（‌即float类型）‌。‌在PyTorch中，‌
+            # 模型的参数默认可能是其他类型，‌比如torch.int或torch.long，‌这取决于你如何初始化它们或者加载它们。‌
             log_probs = net(images)
             loss = self.loss_func(log_probs, labels)
         if self.args.gpu != -1:
