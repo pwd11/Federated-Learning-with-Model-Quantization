@@ -48,7 +48,7 @@ def mnist_iid(args,dataset, num_users, num_items):
                 if num_users*num_items_i <= len(dataset):
                     all_idxs = list(set(all_idxs) - dict_users[i])
     else:
-        c = set(np.random.choice(all_idxs, num_items, replace=False))
+        c = set(np.random.choice(all_idxs, num_items, replace=False))#c是不是应该在循环里边
         for i in range(num_users):  
             dict_users[i] = copy.deepcopy(c)
             # print("\nDivide", len(all_idxs))                      
